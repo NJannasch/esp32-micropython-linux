@@ -63,7 +63,11 @@ Install upip on ESP32 (download and copy to `lib/`)
 `import upip`  
 `upip.install('micropython-uasyncio', 'lib')`
 
-### References:
+## Useful tools
+PyCharm micropython plugin  
+https://blog.jetbrains.com/pycharm/2018/01/micropython-plugin-for-pycharm/
+
+## References:
 * http://docs.micropython.org/en/latest/esp32/tutorial/intro.html
 * https://www.cnx-software.com/2017/10/16/esp32-micropython-tutorials/
 * http://docs.micropython.org/en/latest/esp8266/tutorial/repl.html
