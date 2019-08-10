@@ -3,8 +3,7 @@ Helpful tips for using an esp32 together with linux
 
 # ESP 32 Setup
 ## Firmware download
-Download firmware:  
-https://micropython.org/download#esp32  
+Download firmware: https://micropython.org/download#esp32  
 
 ## Get identifier of your ESP32
 `dmesg | grep -i tty`  
@@ -12,21 +11,32 @@ https://micropython.org/download#esp32
 
 Thereby we can see ttyUSB6 is used.
 ## Flashing
-Install esptool:  
+Install esptool:
 `pip3 install esptool`
 
 Erase the flash:  
-`python3 -m esptool.py --port /dev/ttyUSB6 erase_flash`
+`esptool --port /dev/ttyUSB6 erase_flash`
 
+### ESP32
 Deploy new firmware:  
-`python3 -m esptool.py --chip esp32 --port /dev/ttyUSB6 write_flash -z 0x1000 FIRMWARE.bin`
+`esptool --chip esp32 --port /dev/ttyUSB6 write_flash -z 0x1000 FIRMWARE.bin`
+
+### ESP8266  
+Deploy new firmware:  
+`esptool --port /dev/ttyUSB0 write_flash --flash_size=detect 0 FIRMWARE.bin`
 
 ## Get connected
 Install picocom:  
 `sudo apt install picocom`  
 
+Add current user into dialout group to access serial devices:  
+`sudo adduser USERNAME dialout` (restart needed)
+
 Connect to ESP32:  
 `picocom /dev/ttyUSB6 -b115200`
+
+Exit connection:  
+`Ctrl-a`, then `Ctrl-q`
 
 ## Add device to network
 ```
@@ -58,7 +68,7 @@ while True:
 Available python libs:  
 https://github.com/micropython/micropython-lib
 
-### Install libs
+## Install libs
 Install upip on ESP32 (download and copy to `lib/`)  
 `import upip`  
 `upip.install('micropython-uasyncio', 'lib')`
@@ -67,7 +77,8 @@ Install upip on ESP32 (download and copy to `lib/`)
 PyCharm micropython plugin  
 https://blog.jetbrains.com/pycharm/2018/01/micropython-plugin-for-pycharm/
 
-## References:
+
+### References:
 * http://docs.micropython.org/en/latest/esp32/tutorial/intro.html
 * https://www.cnx-software.com/2017/10/16/esp32-micropython-tutorials/
 * http://docs.micropython.org/en/latest/esp8266/tutorial/repl.html
